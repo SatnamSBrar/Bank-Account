@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankAccount
 {
-    abstract class Account
+    class Account
     {
         //fields
         protected string lastName;
