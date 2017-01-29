@@ -9,46 +9,50 @@ namespace BankAccount
     class Checking : Account
     {
         //fields
-        private double checkingBalance;
+        private int checkingBalance;
 
         private string accountNum;
-        private string accountType;
 
         //properties
-        public double CheckingBalance
+        public int CheckingBalance
         {
             get { return checkingBalance; }
             set { checkingBalance = value; }
         }
-        public string AccountType
+        public string AccountNum
         {
-            get { return accountType; }
-            set { accountType = "Checking"; }
+            get { return accountNum; }
+            set { accountNum = value; }
         }
-
+        
         //constructors
         public Checking (string accountNum)
         {
-            accountNum = this.accountNum;
+            this.AccountNum = accountNum;
         }
 
         //methods
-        public double Deposit (double deposit)
+        public int Deposit (int deposit)
         {
             this.CheckingBalance += deposit;
             return this.CheckingBalance;
         }
-        public double Withdraw(double withdraw)
+        public int Withdraw(int withdraw)
         {
             if (this.CheckingBalance - withdraw < 0)
             {
-                Console.WriteLine("Insufficient funds. You have $" + this.CheckingBalance + " in your account.\n");
+                Console.WriteLine("\nInsufficient funds. You have $" + this.CheckingBalance + " in your account.\n");
             }
             else
             {
                 this.CheckingBalance -= withdraw;
             }
             return this.CheckingBalance;
+        }
+        public void DisplayBalance()
+        {
+            Console.WriteLine("\nAccount Number: " + this.accountNum);
+            Console.WriteLine("\nYour checking account balance is $" + this.CheckingBalance + "\n");
         }
     }
 }

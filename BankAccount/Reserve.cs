@@ -9,46 +9,50 @@ namespace BankAccount
     class Reserve : Account
     {
         //fields
-        private double reserveBalance;
+        private int reserveBalance;
 
         private string accountNum;
-        private string accountType;
 
         //properties
-        public double ReserveBalance
+        public int ReserveBalance
         {
             get { return reserveBalance; }
             set { reserveBalance = value; }
         }
-        public string AccountType
+        public string AccountNum
         {
-            get { return accountType; }
-            set { accountType = "Reserve"; }
+            get { return accountNum; }
+            set { accountNum = value; }
         }
 
         //constructors
-        public Reserve (string accountNum)
+        public Reserve(string accountNum)
         {
-            accountNum = this.accountNum;
+            this.AccountNum = accountNum;
         }
 
         //methods
-        public double Deposit(double deposit)
+        public int Deposit(int deposit)
         {
             this.ReserveBalance += deposit;
             return this.ReserveBalance;
         }
-        public double Withdraw(double withdraw)
+        public int Withdraw(int withdraw)
         {
             if (this.ReserveBalance - withdraw < 0)
             {
-                Console.WriteLine("Insufficient funds. You have $" + this.ReserveBalance + " in your account.\n");
+                Console.WriteLine("\nInsufficient funds. You have $" + this.ReserveBalance + " in your account.\n");
             }
             else
             {
                 this.ReserveBalance -= withdraw;
             }
             return this.ReserveBalance;
+        }
+        public void DisplayBalance()
+        {
+            Console.WriteLine("\nAccount Number: " + this.accountNum);
+            Console.WriteLine("\nYour resernve account balance is $" + this.ReserveBalance + "\n");
         }
     }
 }

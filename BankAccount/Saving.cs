@@ -9,46 +9,50 @@ namespace BankAccount
     class Saving : Account
     {
         //fields
-        private double savingBalance;
+        private int savingBalance;
 
         private string accountNum;
-        private string accountType;
 
         //properties
-        public double SavingBalance
+        public int SavingBalance
         {
             get { return savingBalance; }
             set { savingBalance = value; }
         }
-        public string AccountType
+        public string AccountNum
         {
-            get { return accountType; }
-            set { accountType = "Saving"; }
+            get { return accountNum; }
+            set { accountNum = value; }
         }
 
         //constructors
-        public Saving (string accountNum)
+        public Saving(string accountNum)
         {
-            accountNum = this.accountNum;
+            this.AccountNum = accountNum;
         }
 
         //methods
-        public double Deposit(double deposit)
+        public int Deposit(int deposit)
         {
             this.SavingBalance += deposit;
             return this.SavingBalance;
         }
-        public double Withdraw(double withdraw)
+        public int Withdraw(int withdraw)
         {
             if (this.SavingBalance - withdraw < 0)
             {
-                Console.WriteLine("Insufficient funds. You have $" + this.SavingBalance + " in your account.\n");
+                Console.WriteLine("\nInsufficient funds. You have $" + this.SavingBalance + " in your account.\n");
             }
             else
             {
                 this.SavingBalance -= withdraw;
             }
             return this.SavingBalance;
+        }
+        public void DisplayBalance()
+        {
+            Console.WriteLine("\nAccount Number: " + this.accountNum);
+            Console.WriteLine("\nYour saving account balance is $" + this.SavingBalance + "\n");
         }
     }
 }
