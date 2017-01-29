@@ -15,7 +15,7 @@ namespace BankAccount
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Clear();
- 
+
             //ask client for information
             Console.WriteLine("Welcome to SSB Bank! What is your first name?\n");
             string firstName = Console.ReadLine();
@@ -194,18 +194,24 @@ namespace BankAccount
 
             //instantiate streamwriters
             StreamWriter CheckingWriter = new StreamWriter("CheckingAccount.txt");
-            CheckingWriter.WriteLine("Name of Client: " + CheckingAccount.FullName);
+            CheckingWriter.WriteLine("Name of Client: " + Client.FullName);
             CheckingWriter.WriteLine("Checking Account Number: " + CheckingAccount.AccountNum);
+            CheckingWriter.WriteLine("");
+            CheckingWriter.WriteLine("\tBeginning of Statement Balance: $" + CheckingAccount.CheckingBalance);
             CheckingWriter.WriteLine("");
 
             StreamWriter SavingWriter = new StreamWriter("SavingAccount.txt");
-            SavingWriter.WriteLine("Name of Client: " + SavingAccount.FullName);
+            SavingWriter.WriteLine("Name of Client: " + Client.FullName);
             SavingWriter.WriteLine("Saving Account Number: " + SavingAccount.AccountNum);
+            SavingWriter.WriteLine("");
+            SavingWriter.WriteLine("\tBeginning of Statement Balance: $" + SavingAccount.SavingBalance);
             SavingWriter.WriteLine("");
 
             StreamWriter ReserveWriter = new StreamWriter("ReserveAccount.txt");
-            ReserveWriter.WriteLine("Name of Client: " + ReserveAccount.FullName);
+            ReserveWriter.WriteLine("Name of Client: " + Client.FullName);
             ReserveWriter.WriteLine("Saving Account Number: " + ReserveAccount.AccountNum);
+            ReserveWriter.WriteLine("");
+            ReserveWriter.WriteLine("\tBeginning of Statement Balance: $" + ReserveAccount.ReserveBalance);
             ReserveWriter.WriteLine("");
 
             //clears console before displaying menu items
