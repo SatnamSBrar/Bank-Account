@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace BankAccount
 {
@@ -10,6 +11,11 @@ namespace BankAccount
     {
         static void Main(string[] args)
         {
+            //switches backgroung/foreground colors
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Clear();
+ 
             //ask client for information
             Console.WriteLine("Welcome to SSB Bank! What is your first name?\n");
             string firstName = Console.ReadLine();
@@ -82,15 +88,16 @@ namespace BankAccount
             string email = Console.ReadLine();
 
                         //bypasses error if user does not enter a value
-                        //forces user to enter ".com" and "@"
-                        while (email == "" || email.Contains("@") == false || email.Contains(".com") == false)
+                        //forces user to enter "@"
+                        while (email == "" || email.Contains("@") == false)
                         {
                             Console.WriteLine("\nPlease enter a valid email\n");
                             string email2 = Console.ReadLine();
                             email = email2;
                         }
-            
+
             //ask client to deposit funds into bank accounts
+            Console.Clear();
             Console.WriteLine("\nHello, " + firstName + " " + lastName + "! In order to partner with SSB, you will need to make deposits into your new accounts.\n");
 
             Console.WriteLine("How much would you like to deposit into your Checking Account?\n");
@@ -185,6 +192,22 @@ namespace BankAccount
             Client.Email = email;
             Client.TotalBalance = chDep + sDep + rDep;
 
+            //instantiate streamwriters
+            StreamWriter CheckingWriter = new StreamWriter("CheckingAccount.txt");
+            CheckingWriter.WriteLine("Name of Client: " + CheckingAccount.FullName);
+            CheckingWriter.WriteLine("Checking Account Number: " + CheckingAccount.AccountNum);
+            CheckingWriter.WriteLine("");
+
+            StreamWriter SavingWriter = new StreamWriter("SavingAccount.txt");
+            SavingWriter.WriteLine("Name of Client: " + SavingAccount.FullName);
+            SavingWriter.WriteLine("Saving Account Number: " + SavingAccount.AccountNum);
+            SavingWriter.WriteLine("");
+
+            StreamWriter ReserveWriter = new StreamWriter("ReserveAccount.txt");
+            ReserveWriter.WriteLine("Name of Client: " + ReserveAccount.FullName);
+            ReserveWriter.WriteLine("Saving Account Number: " + ReserveAccount.AccountNum);
+            ReserveWriter.WriteLine("");
+
             //clears console before displaying menu items
             Console.Clear();
 
@@ -192,13 +215,13 @@ namespace BankAccount
             {
             Menu:
                 Console.Clear();
-                Console.WriteLine("    ..######...######..########.....########.....###....##....##.##....##");
-                Console.WriteLine("    .##....##.##....##.##.....##....##.....##...##.##...###...##.##...##.");
-                Console.WriteLine("    .##.......##.......##.....##....##.....##..##...##..####..##.##..##..");
-                Console.WriteLine("    ..######...######..########.....########..##.....##.##.##.##.#####...");
-                Console.WriteLine("    .......##.......##.##.....##....##.....##.#########.##..####.##..##..");
-                Console.WriteLine("    .##....##.##....##.##.....##....##.....##.##.....##.##...###.##...##.");
-                Console.WriteLine("    ..######...######..########.....########..##.....##.##....##.##....##");
+                Console.WriteLine("     ..######...######..########.....########.....###....##....##.##....##");
+                Console.WriteLine("     .##....##.##....##.##.....##....##.....##...##.##...###...##.##...##.");
+                Console.WriteLine("     .##.......##.......##.....##....##.....##..##...##..####..##.##..##..");
+                Console.WriteLine("     ..######...######..########.....########..##.....##.##.##.##.#####...");
+                Console.WriteLine("     .......##.......##.##.....##....##.....##.#########.##..####.##..##..");
+                Console.WriteLine("     .##....##.##....##.##.....##....##.....##.##.....##.##...###.##...##.");
+                Console.WriteLine("     ..######...######..########.....########..##.....##.##....##.##....##");
                 Console.WriteLine("\n");
 
                 Console.WriteLine("\t1 - View Client Information");
@@ -245,6 +268,9 @@ namespace BankAccount
                 if (input == 8)
                 {
                     Console.Clear();
+                    CheckingWriter.Close();
+                    SavingWriter.Close();
+                    ReserveWriter.Close();
                     break;
                 }
 
@@ -354,6 +380,9 @@ namespace BankAccount
 
                         CheckingAccount.Deposit(dep);
                         CheckingAccount.DisplayBalance();
+
+                        //streamwriter
+                        CheckingWriter.WriteLine("\t" + DateTime.Now + "\t" + "(+) $" + dep + "\tUpdated Balance: $" + CheckingAccount.CheckingBalance);
                     }
                     else if (acct == 2)
                     {
@@ -383,6 +412,9 @@ namespace BankAccount
 
                         SavingAccount.Deposit(dep);
                         SavingAccount.DisplayBalance();
+
+                        //streamwriter
+                        SavingWriter.WriteLine("\t" + DateTime.Now + "\t" + "(+) $" + dep + "\tUpdated Balance: $" + SavingAccount.SavingBalance);
                     }
                     else if (acct == 3)
                     {
@@ -412,6 +444,9 @@ namespace BankAccount
 
                         ReserveAccount.Deposit(dep);
                         ReserveAccount.DisplayBalance();
+
+                        //streamwriter
+                        ReserveWriter.WriteLine("\t" + DateTime.Now + "\t" + "(+) $" + dep + "\tUpdated Balance: $" + ReserveAccount.ReserveBalance);
                     }
 
                     Console.WriteLine("\nPress any key to access main menu...\n");
@@ -475,6 +510,9 @@ namespace BankAccount
 
                         CheckingAccount.Withdraw(with);
                         CheckingAccount.DisplayBalance();
+
+                        //streamwriter
+                        CheckingWriter.WriteLine("\t" + DateTime.Now + "\t" + "(-) $" + with + "\tUpdated Balance: $" + CheckingAccount.CheckingBalance);
                     }
                     else if (acct == 2)
                     {
@@ -504,6 +542,9 @@ namespace BankAccount
 
                         SavingAccount.Withdraw(with);
                         SavingAccount.DisplayBalance();
+
+                        //streamwriter
+                        SavingWriter.WriteLine("\t" + DateTime.Now + "\t" + "(-) $" + with + "\tUpdated Balance: $" + SavingAccount.SavingBalance);
                     }
                     else if (acct == 3)
                     {
@@ -533,6 +574,9 @@ namespace BankAccount
 
                         ReserveAccount.Withdraw(with);
                         ReserveAccount.DisplayBalance();
+
+                        //streamwriter
+                        ReserveWriter.WriteLine("\t" + DateTime.Now + "\t" + "(-) $" + with + "\tUpdated Balance: $" + ReserveAccount.ReserveBalance);
                     }
 
                     Console.WriteLine("\nPress any key to access main menu...\n");
@@ -540,6 +584,7 @@ namespace BankAccount
                     goto Menu;
                 }
             }
+            Console.WriteLine("Thank you for your business.\n");
         }
     }
 }
