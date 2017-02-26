@@ -1,7 +1,0 @@
-Name of Client: Brar, Satnam
-Checking Account Number: 272746629711
-
-	Balance: $1000
-
-	1/29/2017 5:00:37 PM	(+) $1000	Updated Balance: $2000
-	1/29/2017 5:00:58 PM	(-) $200	Updated Balance: $1800

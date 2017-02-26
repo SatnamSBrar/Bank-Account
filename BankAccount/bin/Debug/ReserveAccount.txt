@@ -1,7 +1,0 @@
-Name of Client: Brar, Satnam
-Saving Account Number: 272746629713
-
-	Balance: $1000
-
-	1/29/2017 5:00:51 PM	(+) $1000	Updated Balance: $2000
-	1/29/2017 5:01:17 PM	(-) $900	Updated Balance: $1100
